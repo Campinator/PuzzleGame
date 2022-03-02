@@ -21,7 +21,7 @@ public class FollowCam : MonoBehaviour
     [Header("Set in Inspector")]
     public float easing = 0.5f; //smoothing on camera
     public Vector2 minXY = Vector2.zero; //clamping camera
-    
+
     void Awake()
     {
         camZ = this.transform.position.z;
@@ -66,5 +66,31 @@ public class FollowCam : MonoBehaviour
 
         Camera.main.orthographicSize = dest.y + 10;
 
+    }
+
+    public void SwitchView(string eView = "")
+    {
+        /*if (eView == "")
+        {
+            eView = HUDCanvas.viewButtonText.text;
+        }
+        string showing = eView;
+        switch (showing)
+        {
+            case "Show Slingshot":
+                FollowCam.POI = null;
+                HUDCanvas.viewButtonText.text = "Show Castle";
+                break;
+
+            case "Show Castle":
+                FollowCam.POI = S.castle;
+                HUDCanvas.viewButtonText.text = "Show Both";
+                break;
+
+            case "Show Both":
+                FollowCam.POI = GameObject.Find("ViewBoth");
+                HUDCanvas.viewButtonText.text = "Show Slingshot";
+                break;
+        }*/
     }
 }

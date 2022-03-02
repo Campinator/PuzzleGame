@@ -66,7 +66,13 @@ public class Slingshot : MonoBehaviour
         projectile.transform.position = launchPos;
 
         projRB = projectile.GetComponent<Rigidbody>();
-        projRB.velocity = (launchPos - target.transform.position) * velocityMultiplier;
+
+        float angle = Random.Range(30, 60) * Mathf.Deg2Rad; //more or less arc
+        //2D kinematics equations whooo
+        float range = Mathf.Abs(launchPos.x - target.transform.position.x) * Random.Range(0.85f, 1.15f); //fuzz accuracy some so its not just sniping the player
+        float v = Mathf.Sqrt((range * -Physics.gravity.y) / (Mathf.Sin(2 * angle)));
+        Vector3 launchV = new Vector3(v * Mathf.Cos(angle), v * Mathf.Sin(angle), 0);
+        projRB.velocity = launchV; 
         FollowCam.POI = projectile; //set point of interest for follow cam
         projectile = null;
         ProjectileLine.S.poi = projectile;

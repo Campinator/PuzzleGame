@@ -17,7 +17,7 @@ public class Goal : MonoBehaviour
             mat.color = c;
 
             //signal that game has completed
-
+            GameManager.GM.nextLevel = true;
         }
     }
 }

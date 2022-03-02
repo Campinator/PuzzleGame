@@ -24,6 +24,7 @@ public class HUDCanvas : MonoBehaviour
     public Text livesTextbox; //textbox for the lives
     public Text scoreTextbox; //textbox for the score
     public Text highScoreTextbox; //textbox for highscore
+    public static Text viewButtonText;
     
     //GM Data
     private int level;
@@ -39,8 +40,6 @@ public class HUDCanvas : MonoBehaviour
         //reference to levle info
         level = gm.gameLevelsCount;
         totalLevels = gm.gameLevels.Length;
-
-
 
         SetHUD();
     }//end Start
