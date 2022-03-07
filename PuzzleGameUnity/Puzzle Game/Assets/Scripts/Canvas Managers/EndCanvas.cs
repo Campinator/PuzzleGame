@@ -21,6 +21,7 @@ public class EndCanvas : MonoBehaviour
 
     [Header("Canvas SETTINGS")]
     public Text endMsgTextbox; //textbox for the title
+    public Text creditsTextbox;
 
 
     private void Start()
@@ -31,6 +32,7 @@ public class EndCanvas : MonoBehaviour
 
         //Set the Canvas text from GM reference
         endMsgTextbox.text = gm.endMsg;
+        creditsTextbox.text = gm.gameCredits;
 
     }
 
