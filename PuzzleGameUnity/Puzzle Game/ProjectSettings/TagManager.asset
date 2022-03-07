@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Projectile
   - Goal
+  - BuildingBlock
+  - GameButton
+  - Slingshot
   layers:
   - Default
   - TransparentFX

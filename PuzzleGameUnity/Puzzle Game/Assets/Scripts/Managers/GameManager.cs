@@ -62,9 +62,9 @@ public class GameManager : MonoBehaviour
 
     //static variables can not be updated in the inspector, however private serialized fields can be
     [SerializeField] //Access to private variables in editor
-    private int numberOfLives; //set number of lives in the inspector
-    static public int lives; // number of lives for player 
-    public int Lives { get { return lives; } set { lives = value; } }//access to private variable died [get/set methods]
+    private int numberOfShots; //set number of shots in the inspector
+    static public int shots; // number of shots to be fired 
+    public int Shots { get { return shots; } set { shots = value; } }//access to private variable died [get/set methods]
 
     static public int score;  //score value
     public int Score { get { return score; } set { score = value; } }//access to private variable died [get/set methods]
@@ -76,7 +76,8 @@ public class GameManager : MonoBehaviour
 
     [Space(10)]
     public string defaultEndMessage = "Game Over";//the end screen message, depends on winning outcome
-    public string loseMessage = "You Lose"; //Message if player looses
+    [TextArea]
+    public string loseMessage = "Your Castle was destroyed!\nTry again?"; //Message if player loses
     public string winMessage = "You Win"; //Message if player wins
     [HideInInspector] public string endMsg;//the end screen message, depends on winning outcome
 
@@ -108,7 +109,7 @@ public class GameManager : MonoBehaviour
 
     //Win/Loose conditon
     [SerializeField] //to test in inspector
-    private bool playerWon = false;
+    private bool playerWon = true;
 
     //reference to system time
     private static string thisDay = System.DateTime.Now.ToString("yyyy"); //today's date as string
@@ -143,8 +144,10 @@ public class GameManager : MonoBehaviour
         //if we are playing the game
         if (gameState == gameStates.Playing)
         {
-            //if we have died and have no more lives, go to game over
-            if (levelLost && (lives == 0)) { GameOver(); }
+            //if we have lost the level, go to game over
+            //if we have survived all the shots, go on
+            if(shots == 0) { NextLevel(); }
+            if (levelLost) { playerWon = false; GameOver(); }
 
         }//end if (gameState == gameStates.Playing)
 
@@ -165,7 +168,7 @@ public class GameManager : MonoBehaviour
 
         gameState = gameStates.Playing; //set the game state to playing
 
-        lives = numberOfLives; //set the number of lives
+        shots = numberOfShots; //set the number of shots
         score = 0; //set starting score
 
         //set High Score
@@ -181,7 +184,8 @@ public class GameManager : MonoBehaviour
 
         endMsg = defaultEndMessage; //set the end message default
 
-        playerWon = false; //set player winning condition to false
+        playerWon = true; //set player winning condition to false
+        levelLost = false;
     }//end StartGame()
 
 
@@ -216,6 +220,7 @@ public class GameManager : MonoBehaviour
         {
             gameLevelsCount++; //add to level count for next level
             loadLevel = gameLevelsCount - 1; //find the next level in the array
+            shots = numberOfShots;
             SceneManager.LoadScene(gameLevels[loadLevel]); //load next level
 
         }

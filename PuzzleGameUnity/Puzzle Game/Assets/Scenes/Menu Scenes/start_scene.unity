@@ -171,17 +171,18 @@ MonoBehaviour:
   copyrightDate: Copyright 2022
   recordHighScore: 1
   defaultHighScore: 1000
-  numberOfLives: 3
+  numberOfShots: 5
   levelLost: 0
   defaultEndMessage: Game Over
-  loseMessage: You Lose
+  loseMessage: 'Your castle was destroyed!
+
+    Try again?'
   winMessage: You Win
   endMsg: 
   startScene: start_scene
   gameOverScene: end_scene
   gameLevels:
   - level_00
-  - level_01
   gameLevelsCount: 0
   nextLevel: 0
   gameState: 0

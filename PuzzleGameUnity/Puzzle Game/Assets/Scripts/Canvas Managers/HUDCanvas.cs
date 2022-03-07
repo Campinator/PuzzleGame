@@ -21,22 +21,23 @@ public class HUDCanvas : MonoBehaviour
 
     [Header("Canvas SETTINGS")]
     public Text levelTextbox; //textbox for level count
-    public Text livesTextbox; //textbox for the lives
+    public Text shotsTextbox; //textbox for the shots
     public Text scoreTextbox; //textbox for the score
     public Text highScoreTextbox; //textbox for highscore
+    public Text viewButtonTextbox; //textbox for change view
     public static Text viewButtonText;
     
     //GM Data
     private int level;
     private int totalLevels;
-    private int lives;
+    private int shots;
     private int score;
     private int highscore;
 
     private void Start()
     {
         gm = GameManager.GM; //find the game manager
-
+        viewButtonText = this.viewButtonTextbox;
         //reference to levle info
         level = gm.gameLevelsCount;
         totalLevels = gm.gameLevels.Length;
@@ -53,16 +54,20 @@ public class HUDCanvas : MonoBehaviour
 
     void GetGameStats()
     {
-        lives = gm.Lives;
+        shots = gm.Shots;
         score = gm.Score;
         highscore = gm.HighScore;
     }
 
     void SetHUD()
     {
+        string shotsTxt = "";
+        for(int i = 0; i < shots; i++){
+            shotsTxt += "o";
+        }
         //if texbox exsists update value
         if (levelTextbox) { levelTextbox.text = "Level " + level + "/" + totalLevels; }
-        if (livesTextbox) { livesTextbox.text = "Lives " + lives; }
+        if (shotsTextbox) { shotsTextbox.text = "Shots Left " + shotsTxt; }
         if (scoreTextbox) { scoreTextbox.text = "Score " + score; }
         if (highScoreTextbox) { highScoreTextbox.text = "High Score " + highscore; }
 

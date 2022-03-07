@@ -41,7 +41,7 @@ public class FollowCam : MonoBehaviour
         Vector3 dest;
         if(POI == null)
         {
-            dest = Vector3.zero;
+            dest = Slingshot.TARGET_POS;
         }
         else
         {
@@ -70,7 +70,7 @@ public class FollowCam : MonoBehaviour
 
     public void SwitchView(string eView = "")
     {
-        /*if (eView == "")
+        if (eView == "")
         {
             eView = HUDCanvas.viewButtonText.text;
         }
@@ -78,19 +78,20 @@ public class FollowCam : MonoBehaviour
         switch (showing)
         {
             case "Show Slingshot":
-                FollowCam.POI = null;
+                FollowCam.POI = GameObject.FindGameObjectWithTag("Slingshot");
                 HUDCanvas.viewButtonText.text = "Show Castle";
                 break;
 
             case "Show Castle":
-                FollowCam.POI = S.castle;
+                FollowCam.POI = GameObject.FindGameObjectWithTag("Goal");
                 HUDCanvas.viewButtonText.text = "Show Both";
                 break;
 
             case "Show Both":
                 FollowCam.POI = GameObject.Find("ViewBoth");
+                Debug.Log('e');
                 HUDCanvas.viewButtonText.text = "Show Slingshot";
                 break;
-        }*/
+        }
     }
 }
