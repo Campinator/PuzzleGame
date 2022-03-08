@@ -1,3 +1,13 @@
+/**
+ * Date Created: Feb 16. 2022
+ * Created By: Camp Steiner
+ * 
+ * Date Modified: March 7, 2022
+ * Modified by: Camp Steiner
+ * 
+ * Description: Target for the slingshot to aim at
+ * 
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

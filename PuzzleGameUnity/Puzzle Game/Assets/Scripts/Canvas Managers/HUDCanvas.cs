@@ -3,7 +3,7 @@
  * Date Created: Feb 23, 2022
  * 
  * Last Edited by: Camp Steiner
- * Last Edited: Feb 28, 2022
+ * Last Edited: March 7, 2022
  * 
  * Description: Updates HUD canvas referecing game manager
 ****/
@@ -68,7 +68,7 @@ public class HUDCanvas : MonoBehaviour
         //if texbox exsists update value
         if (levelTextbox) { levelTextbox.text = "Level " + level + "/" + totalLevels; }
         if (shotsTextbox) { shotsTextbox.text = "Shots Left " + shotsTxt; }
-        if (scoreTextbox) { scoreTextbox.text = "Score " + score; }
+        if (scoreTextbox) { scoreTextbox.text = "Budget: $ " + score; }
         if (highScoreTextbox) { highScoreTextbox.text = "High Score " + highscore; }
 
     }//end SetHUD()

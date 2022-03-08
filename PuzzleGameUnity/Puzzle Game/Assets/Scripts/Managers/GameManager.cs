@@ -3,7 +3,7 @@
  * Date Created: Feb 23, 2022
  * 
  * Last Edited by: Camp Steiner
- * Last Edited: Feb 28, 2022
+ * Last Edited: March 7, 2022
  * 
  * Description: Basic GameManager Template
 ****/
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     [Header("GAME SETTINGS")]
 
     [Tooltip("Will the high score be recorded")]
-    public bool recordHighScore = false; //is the High Score recorded
+    public bool recordHighScore = true; //is the High Score recorded
 
     [SerializeField] //Access to private variables in editor
     private int defaultHighScore = 1000;
@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
 
     static public int score;  //score value
     public int Score { get { return score; } set { score = value; } }//access to private variable died [get/set methods]
+    static public int totScore;  //score value
+    public int TotScore { get { return totScore; } set { totScore = value; } }//access to private variable died [get/set methods]
 
     [SerializeField] //Access to private variables in editor
     [Tooltip("Check to test player lost the level")]
@@ -78,7 +80,8 @@ public class GameManager : MonoBehaviour
     public string defaultEndMessage = "Game Over";//the end screen message, depends on winning outcome
     [TextArea]
     public string loseMessage = "Your Castle was destroyed!\nTry again?"; //Message if player loses
-    public string winMessage = "You Win"; //Message if player wins
+    [TextArea]
+    public string winMessage = "You Win! Total Score: " + totScore; //Message if player wins
     [HideInInspector] public string endMsg;//the end screen message, depends on winning outcome
 
     [Header("SCENE SETTINGS")]
@@ -136,7 +139,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //if ESC is pressed , exit game
-        if (Input.GetKey("escape")) { ExitGame(); }
+        if (Input.GetKeyDown(KeyCode.Escape)) { ExitGame(); }
 
         //Check for next level
         if (nextLevel) { NextLevel(); }
@@ -150,9 +153,6 @@ public class GameManager : MonoBehaviour
             if (levelLost) { playerWon = false; GameOver(); }
 
         }//end if (gameState == gameStates.Playing)
-
-        //Check Score
-        CheckScore();
 
     }//end Update
 
@@ -170,17 +170,7 @@ public class GameManager : MonoBehaviour
 
         shots = numberOfShots; //set the number of shots
         score = 0; //set starting score
-
-        //set High Score
-        if (recordHighScore) //if we are recording highscore
-        {
-            //if the high score, is less than the default high score
-            if (highScore <= defaultHighScore)
-            {
-                highScore = defaultHighScore; //set the high score to defulat
-                PlayerPrefs.SetInt("HighScore", highScore); //update high score PlayerPref
-            }//end if (highScore <= defaultHighScore)
-        }//end  if (recordHighScore) 
+        GetHighScore();
 
         endMsg = defaultEndMessage; //set the end message default
 
@@ -203,7 +193,7 @@ public class GameManager : MonoBehaviour
     {
         gameState = gameStates.GameOver; //set the game state to gameOver
 
-        if (playerWon) { endMsg = winMessage; } else { endMsg = loseMessage; } //set the end message
+        if (playerWon) { endMsg = winMessage; CheckScore(); } else { endMsg = loseMessage; } //set the end message
 
         SceneManager.LoadScene(gameOverScene); //load the game over scene
         Debug.Log("Gameover");
@@ -211,8 +201,9 @@ public class GameManager : MonoBehaviour
 
 
     //GO TO THE NEXT LEVEL
-    void NextLevel()
+    public void NextLevel()
     {
+        TotScore += Score;
         nextLevel = false; //reset the next level
 
         //as long as our level count is not more than the amount of levels

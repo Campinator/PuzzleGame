@@ -2,10 +2,10 @@
  * Date Created: Feb 16. 2022
  * Created By: Camp Steiner
  * 
- * Date Modified: Feb 16, 2022
+ * Date Modified: March 7, 2022
  * Modified by: Camp Steiner
  * 
- * Description: Rigid body go sleep
+ * Description: Turns off and on the rigid body of the blocks while building
  * 
  */
 using System.Collections;

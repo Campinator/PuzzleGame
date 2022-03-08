@@ -3,7 +3,7 @@
  * Date Created: Feb 23, 2022
  * 
  * Last Edited by: Camp Steiner
- * Last Edited: Feb 28, 2022
+ * Last Edited: March 2, 2022
  * 
  * Description: Updates end canvas refencing game manger
 ****/
